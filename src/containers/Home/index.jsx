@@ -13,7 +13,7 @@ export default class Home extends React.PureComponent {
     render() {
         return (
             <div id="home" onClick={this.clickHandle}>
-                home
+                home1
                 <Test onSearch={(value) => {this.searchHandle(value)}}/>
             </div>
         );

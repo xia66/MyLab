@@ -11,8 +11,7 @@ module.exports = {
     entry: {
         root: path.resolve(__dirname, 'src/RootMul.jsx'),
         home: path.resolve(__dirname, 'src/containers/Home/index.jsx'),
-        test: path.resolve(__dirname, 'src/containers/Test/index.jsx'),
-        user: path.resolve(__dirname, 'src/containers/User/index.jsx')
+        grailLayout: path.resolve(__dirname, 'src/containers/grailLayout/index.jsx')
     },
     output: {
         path: __dirname + "/build",
@@ -47,13 +46,8 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'src/index.tmpl.html'),
-            chunks: ['test'],
-            filename: 'test/index.html'
-        }),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'src/index.tmpl.html'),
-            chunks: ['user'],
-            filename: 'user/index.html'
+            chunks: ['grailLayout'],
+            filename: 'grailLayout/index.html'
         }),
         
         //单独打包css，多页面配置如下,每个css都单独打包，这样页面不会报引用同一个css的错误

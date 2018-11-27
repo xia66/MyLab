@@ -7,9 +7,9 @@ export default class User extends React.PureComponent {
     render() {
         return (
             <div id="user">
-                users
+                圣杯/双飞翼布局
             </div>
         );
     }
 }
-ReactDOM.render(<User />, document.getElementById('root'));
+ReactDOM.render(<User />, document.body);

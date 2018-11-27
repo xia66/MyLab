@@ -9,8 +9,7 @@ export default class Root extends React.PureComponent {
                 <ol>
                     目录
                     <li><a href='home/index.html'>home</a></li>
-                    <li><a href='test/index.html'>test</a></li>                
-                    <li><a href='user/index.html'>user</a></li>
+                    <li><a href='grailLayout/index.html'>圣杯/双飞翼布局</a></li>
                 </ol>
             </div>
         );
