@@ -1,7 +1,6 @@
 import React from 'react';
 import './index.less';
 import ReactDOM from 'react-dom';
-import {NavLink} from 'react-router-dom'
 
 export default class Home extends React.PureComponent {
     clickHandle(event){
@@ -27,7 +26,7 @@ class Test extends React.Component {
         }
     }
     //这里是实现一下事件包装，在外部引用这个组件的onsearch事件其实内部是用其他事件实现的这个包装事件
-    onClickHandle(e){
+    onClickHandle(e) {
         e.stopPropagation();
         this.props.onSearch(this.state.value);
     }

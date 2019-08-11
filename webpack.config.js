@@ -2,17 +2,33 @@ const path = require('path');
 var webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');//导入生成html文件的插件
 const MiniCssExtractPlugin = require("mini-css-extract-plugin") //独立打包css文件插件
+const getPageConfig = require('./page.config');
+
+// 多页面配置解析
+let entry = {root: path.resolve(__dirname, 'src/root.jsx')};
+let pageHtmlPlugin = [
+    new HtmlWebpackPlugin({
+        template: path.join(__dirname, 'src/index.tmpl.html'),
+        chunks: ['root'],
+        filename: 'index.html'
+    })
+]
+getPageConfig().forEach((page) => {
+    entry[page.name] = path.resolve(__dirname, page.entry); // 多入口
+    pageHtmlPlugin.push(new HtmlWebpackPlugin({ // 多页面
+        template: path.join(__dirname, page.template),
+        chunks: [page.name],
+        filename: page.filename
+    }))
+})
 
 //向外暴露一个配置对象，commonjs规范（因为webpack是基于node构建）
 //webpack默认只能打包处理.js后缀的文件，像.jpg .vue等文件无法主动处理，所以需要配置第三方loader
 module.exports = {
     mode: 'development', //development  production ( 生产环境会将代码压缩 )
 
-    entry: {
-        root: path.resolve(__dirname, 'src/RootMul.jsx'),
-        home: path.resolve(__dirname, 'src/containers/Home/index.jsx'),
-        grailLayout: path.resolve(__dirname, 'src/containers/grailLayout/index.jsx')
-    },
+    entry,
+
     output: {
         path: __dirname + "/build",
         filename: "scripts/[name]-[hash].js",
@@ -34,21 +50,7 @@ module.exports = {
     },
 
     plugins: [
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'src/index.tmpl.html'),
-            chunks: ['root'],
-            filename: 'index.html'
-        }),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'src/index.tmpl.html'),
-            chunks: ['home'],
-            filename: 'home/index.html'
-        }),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'src/index.tmpl.html'),
-            chunks: ['grailLayout'],
-            filename: 'grailLayout/index.html'
-        }),
+        ...pageHtmlPlugin,
         
         //单独打包css，多页面配置如下,每个css都单独打包，这样页面不会报引用同一个css的错误
         new MiniCssExtractPlugin({//选项与htmlPlugin类似
