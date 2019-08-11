@@ -2,7 +2,7 @@ const path = require('path');
 var webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');//导入生成html文件的插件
 const MiniCssExtractPlugin = require("mini-css-extract-plugin") //独立打包css文件插件
-const getPageConfig = require('./page.config');
+const {pageConfigs} = require('./page.config');
 
 // 多页面配置解析
 let entry = {root: path.resolve(__dirname, 'src/root.jsx')};
@@ -13,7 +13,7 @@ let pageHtmlPlugin = [
         filename: 'index.html'
     })
 ]
-getPageConfig().forEach((page) => {
+pageConfigs.forEach((page) => {
     entry[page.name] = path.resolve(__dirname, page.entry); // 多入口
     pageHtmlPlugin.push(new HtmlWebpackPlugin({ // 多页面
         template: path.join(__dirname, page.template),
