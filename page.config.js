@@ -1,7 +1,7 @@
 const withStylePages = [ // 样式测试，在src下新建文件夹，然后在这里添加同名元素即可
     {
         name: 'home',
-        CNName: '呵呵'
+        CNName: 'home'
     }, {
         name: 'grailLayout',
         CNName: '圣杯/双飞翼布局'

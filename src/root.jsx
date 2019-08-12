@@ -1,19 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {NavLink} from 'react-router-dom';
+
+import { Input } from 'antd';
+
 const {withStylePages, pureScriptPages} = require('./../page.config')
 
 export default class Root extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            pages: []
+            allPages: [],
+            renderPages: []
         }
         
     }
 
     componentWillMount() {
-        let pages = withStylePages.map((page) => {
+        let allPages = withStylePages.map((page) => {
             return Object.assign(page, {
                 url: `${page.name}/index.html`
             })
@@ -22,17 +26,30 @@ export default class Root extends React.PureComponent {
                 url: `pureScript/${page.name}.html`
             })
         }))
-        this.setState({pages});
+        this.setState({
+            allPages,
+            renderPages: allPages
+        });
     }
 
+    async onChangeSearch(e) {
+        let renderPages = [];
+        renderPages = this.state.allPages.filter((page) => {
+            return page.CNName.indexOf(e.target.value) > -1;
+        })
+        this.setState({
+            renderPages
+        });
+        
+    }
+    
     render() {
-        console.log(this.state.pages);
         return (
             <div id="directory">
+                <input onChange = {this.onChangeSearch.bind(this)} />
                 <ol>
-                    目录
                     {
-                        this.state.pages.map((page) => {
+                        this.state.renderPages.map((page) => {
                             return(
                                 <li>
                                     <a href={page.url}>{page.CNName}</a>

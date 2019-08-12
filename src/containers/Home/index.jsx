@@ -12,28 +12,10 @@ export default class Home extends React.PureComponent {
     render() {
         return (
             <div id="home" onClick={this.clickHandle}>
-                home1
-                <Test onSearch={(value) => {this.searchHandle(value)}}/>
+                home
             </div>
         );
     }
 }
-class Test extends React.Component {
-    constructor(props, context) {
-        super(props,context);
-        this.state = {
-            value: ''
-        }
-    }
-    //这里是实现一下事件包装，在外部引用这个组件的onsearch事件其实内部是用其他事件实现的这个包装事件
-    onClickHandle(e) {
-        e.stopPropagation();
-        this.props.onSearch(this.state.value);
-    }
-    render() {
-        return(
-            <input type="text" onClick={(event)=>this.onClickHandle(event)} onChange={ (e)=>{this.setState({value:e.target.value})} } value={this.state.value}/>
-        )
-    }
-}
+
 ReactDOM.render(<Home />, document.body);
