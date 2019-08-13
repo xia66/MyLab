@@ -12,4 +12,4 @@ export default class User extends React.PureComponent {
         );
     }
 }
-ReactDOM.render(<User />, document.body);
+ReactDOM.render(<User />, document.getElementById('root'));

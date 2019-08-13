@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {NavLink} from 'react-router-dom'
 
-export default class JsTest extends React.PureComponent {
+export default class JsTest extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -21,4 +21,4 @@ export default class JsTest extends React.PureComponent {
         );
     }
 }
-ReactDOM.render(<JsTest />, document.body);
+ReactDOM.render(<JsTest />, document.getElementById('root'));

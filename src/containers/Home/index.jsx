@@ -18,4 +18,4 @@ export default class Home extends React.PureComponent {
     }
 }
 
-ReactDOM.render(<Home />, document.body);
+ReactDOM.render(<Home />, document.getElementById('root'));
