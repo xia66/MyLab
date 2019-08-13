@@ -51,7 +51,7 @@ export default class Root extends React.PureComponent {
                     {
                         this.state.renderPages.map((page) => {
                             return(
-                                <li>
+                                <li key={page.name}>
                                     <a href={page.url}>{page.CNName}</a>
                                 </li>)
                         })
