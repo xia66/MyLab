@@ -15,6 +15,9 @@ const pureScriptPages = [ // js、算法测试，在pureScript下新建文件，
     }, {
         name: 'Hoc',
         CNName: 'Hoc（高阶组件）'
+    }, {
+        name: 'hook',
+        CNName: 'ract16.8新特性hook'
     }
     
 ]
