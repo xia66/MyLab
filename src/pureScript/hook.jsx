@@ -6,7 +6,11 @@ import ReactDOM from 'react-dom';
     只在最顶层使用 Hook，不要在循环，条件或嵌套函数中调用 Hook
 */
 
-export default function Hook1() {
+/* 
+    effect在每次渲染后执行，执行前effect会对上一个effect清除，而useEffect（上一个）返回的函数会在被清除前执行（有个闭包，所以用到的state是变化前的state）
+    所以会有下面的执行顺序
+*/
+export function Hook1(props) {
     const [count, setCount] = useState(0);
     useEffect(() => {
         console.log('渲染后', count); // 在渲染后执行

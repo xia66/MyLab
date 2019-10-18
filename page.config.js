@@ -2,6 +2,9 @@ const withStylePages = [ // 样式测试，在src下新建文件夹，然后在�
     {
         name: 'grailLayout',
         CNName: '圣杯/双飞翼布局'
+    }, {
+        name: 'animation_x',
+        CNName: '随意写个动画'
     }
 ]
 
