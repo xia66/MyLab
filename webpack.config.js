@@ -2,10 +2,10 @@ const path = require('path');
 var webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');//导入生成html文件的插件
 const MiniCssExtractPlugin = require("mini-css-extract-plugin") //独立打包css文件插件
-const {pageConfigs} = require('./page.config');
+const { pageConfigs } = require('./page.config');
 
 // 多页面配置解析
-let entry = {root: path.resolve(__dirname, 'src/root.jsx')};
+let entry = { root: path.resolve(__dirname, 'src/root.jsx') };
 let pageHtmlPlugin = [
     new HtmlWebpackPlugin({
         template: path.join(__dirname, 'src/index.tmpl.html'),
@@ -35,23 +35,23 @@ module.exports = {
         chunkFilename: 'scripts/[name]-[hash].chunk.js',
     },
     //解析配置，简化引入文件书写
-    resolve:{
-    // 解析模块请求的选项
-    // （不适用于对 loader 解析）
+    resolve: {
+        // 解析模块请求的选项
+        // （不适用于对 loader 解析）
         // 使用的扩展名
-        extensions:['*', '.js','.jsx'],//自动解析的后缀名
-        alias:{
+        extensions: ['*', '.js', '.jsx'],//自动解析的后缀名
+        alias: {
             // 模块别名列表
-            $Static:path.resolve(__dirname,'src/static/'),
-            $Pubilc:path.resolve(__dirname,'src/public/'),
-            $Containers:path.resolve(__dirname,'src/containers/'),
-            $Components:path.resolve(__dirname,'src/components/'),
+            $Static: path.resolve(__dirname, 'src/static/'),
+            $Pubilc: path.resolve(__dirname, 'src/public/'),
+            $Containers: path.resolve(__dirname, 'src/containers/'),
+            $Components: path.resolve(__dirname, 'src/components/'),
         }
     },
 
     plugins: [
         ...pageHtmlPlugin,
-        
+
         //单独打包css，多页面配置如下,每个css都单独打包，这样页面不会报引用同一个css的错误
         new MiniCssExtractPlugin({//选项与htmlPlugin类似
             filename: "style/[name].css",
@@ -59,9 +59,9 @@ module.exports = {
         }),
 
         new webpack.ProvidePlugin({
-            $:"jquery",
-            jQuery:"jquery",
-            "window.jQuery":"jquery"
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery"
         }),
         new webpack.optimize.SplitChunksPlugin({
             chunks: "all",
@@ -103,7 +103,7 @@ module.exports = {
                         options: {
                             plugins: [
                                 require("autoprefixer"), /*在这里添加*/
-                                require('postcss-px2rem')({remUnit: 12}),
+                                require('postcss-px2rem')({ remUnit: 12 }),
                                 require('postcss-flexbugs-fixes'),
 
                             ]
@@ -122,21 +122,21 @@ module.exports = {
                 ]
             },
             {
-                test:/\.(png|jpg|gif|svg)$/,
-                use:[{
-                        loader:'url-loader',
-                        options:{ // 这里的options选项参数可以定义多大的图片转换为base64
-                            name: '[name].[ext]',
-                            limit:50000, // 表示小于50kb的图片转为base64,大于50kb的是路径
-                            outputPath:'images' //定义输出的图片文件夹
-                        }
-                    },
-                    {   //压缩图片要在file-loader之后使用
-                        loader:'image-webpack-loader',
-                        options:{
-                            bypassOnDebug: true
-                        }
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: { // 这里的options选项参数可以定义多大的图片转换为base64
+                        name: '[name].[ext]',
+                        limit: 50000, // 表示小于50kb的图片转为base64,大于50kb的是路径
+                        outputPath: 'images' //定义输出的图片文件夹
                     }
+                },
+                {   //压缩图片要在file-loader之后使用
+                    loader: 'image-webpack-loader',
+                    options: {
+                        bypassOnDebug: true
+                    }
+                }
                 ]
             }
         ]

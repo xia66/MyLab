@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {NavLink} from 'react-router-dom';
 
 import { Input } from 'antd';
 
-const {withStylePages, pureScriptPages} = require('./../page.config')
+const { withStylePages, pureScriptPages } = require('./../page.config')
 
 export default class Root extends React.PureComponent {
     constructor(props) {
@@ -13,7 +12,7 @@ export default class Root extends React.PureComponent {
             allPages: [],
             renderPages: []
         }
-        
+
     }
 
     componentWillMount() {
@@ -21,7 +20,7 @@ export default class Root extends React.PureComponent {
             return Object.assign(page, {
                 url: `${page.name}/index.html`
             })
-        }).concat( pureScriptPages.map((page) => {
+        }).concat(pureScriptPages.map((page) => {
             return Object.assign(page, {
                 url: `pureScript/${page.name}.html`
             })
@@ -40,17 +39,17 @@ export default class Root extends React.PureComponent {
         this.setState({
             renderPages
         });
-        
+
     }
-    
+
     render() {
         return (
             <div id="directory">
-                <input onChange = {this.onChangeSearch.bind(this)} />
+                <input onChange={this.onChangeSearch.bind(this)} />
                 <ol>
                     {
                         this.state.renderPages.map((page) => {
-                            return(
+                            return (
                                 <li key={page.name}>
                                     <a href={page.url}>{page.CNName}</a>
                                 </li>)

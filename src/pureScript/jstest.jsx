@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {NavLink} from 'react-router-dom'
 
 export default class JsTest extends React.Component {
     constructor(props) {
@@ -11,7 +10,7 @@ export default class JsTest extends React.Component {
 
     }
 
-    
+
 
     render() {
         return (

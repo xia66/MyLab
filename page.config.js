@@ -21,21 +21,24 @@ const pureScriptPages = [ // js、算法测试，在pureScript下新建文件，
     }, {
         name: 'hook',
         CNName: 'ract16.8新特性hook'
+    }, {
+        name: 'promiseCache',
+        CNName: 'promise缓存'
     }
-    
+
 ]
 
 const pageConfigs = withStylePages.map((page) => {
-    const {name} = page;
+    const { name } = page;
     return {
         'name': `${name}`,
         'entry': `src/containers/${name}/index.jsx`,
         'template': `src/index.tmpl.html`,
         'filename': `${name}/index.html`
-        
+
     }
 }).concat(pureScriptPages.map((page) => {
-    const {name} = page;
+    const { name } = page;
     return {
         'name': `${name}`,
         'entry': `src/pureScript/${name}.jsx`,
